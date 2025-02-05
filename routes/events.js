@@ -21,8 +21,8 @@ router.post(
   [
     check("title", "El titulo es obligatorio").not().isEmpty(),
     check("notes", "La nota es obligatorio").not().isEmpty(),
-    check("start", "La fecha inicial es obligatorio").isDate(),
-    check("end", "La fecha final es obligatorio").isDate(),
+    //check("start", "La fecha inicial es obligatorio").isISO8601().isDate(),
+    //check("end", "La fecha final es obligatorio").isISO8601().isDate(),
     validar,
   ],
   newEvent
@@ -30,15 +30,15 @@ router.post(
 
 //actualizar
 router.put(
-    "/:id",
-    [
-        check("title", "El titulo es obligatorio").not().isEmpty(),
-        check("notes", "La nota es obligatorio").not().isEmpty(),
-        check("start", "La fecha inicial es obligatorio").isDate(),
-        check("end", "La fecha final es obligatorio").isDate(),
-        validar,
-    ],
-    editEvent
+  "/:id",
+  [
+    check("title", "El titulo es obligatorio").not().isEmpty(),
+    check("notes", "La nota es obligatorio").not().isEmpty(),
+    check("start", "La fecha inicial es obligatorio").isISO8601().toDate(),
+    check("end", "La fecha final es obligatorio").isISO8601().toDate(),
+    validar,
+  ],
+  editEvent
 );
 
 //borrar

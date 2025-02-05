@@ -42,18 +42,36 @@ const newEvent = async(req,res=response)=>{
           msg: "token no valido o expirado",
         });
       }
+
+      let { start, end } = req.body;
+
+      // Convertir las fechas a objetos Date
+      start = new Date(start);
+      end = new Date(end);
+
+      // Verificar que las fechas sean válidas
+      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+        return res.status(400).json({
+          ok: false,
+          msg: "Formato de fecha inválido",
+        });
+      }
+
       //aki instancio un nuevo modelo
       let eve = new Evento({
         ...req.body,
-        user: uid
+        start,
+        end,
+        user: uid,
       });
+
       //aki lo save a la db
       await eve.save();
       //rpta de rpta correcta
       res.status(201).json({
-        ok:true,
-        msg:"Evento agregado",
-        title: eve
+        ok: true,
+        msg: "Evento agregado",
+        title: eve,
       });
     }
     catch(error){
