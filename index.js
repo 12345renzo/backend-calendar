@@ -12,6 +12,14 @@ dbConection();
 
 //usar el cors
 app.use(cors());
+// Configuración más detallada de CORS
+/*app.use(cors({
+    origin: ['http://localhost:4000', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    optionsSuccessStatus: 200
+}));*/
 
 //directorio publico
 //use es un middleware funcion que se ejecuta cuando ay una peticion al servidor
